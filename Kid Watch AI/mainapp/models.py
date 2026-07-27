@@ -1,8 +1,5 @@
 from django.db import models
 from datetime import datetime
-from asyncio.windows_events import NULL
-from operator import mod
-
 # Create your models here.
 
 class UserdetailsModel(models.Model):
