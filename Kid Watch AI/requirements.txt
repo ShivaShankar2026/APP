@@ -1,0 +1,12 @@
+pip install Django==4.1.5
+
+
+pip install joblib==1.2.0
+pip install mysql==0.0.3
+pip install mysqlclient==2.1.1
+
+pip install numpy==1.24.1
+
+
+
+

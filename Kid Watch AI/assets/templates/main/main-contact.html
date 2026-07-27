@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="zxx">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>YTKSA - YouTube Kids Sentiment Analysis and Detection</title>
+    
+    <!-- favicon -->
+    <link rel=icon href="{% static 'main/img/play.png' %}" sizes="20x20" type="image/png">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{% static 'main/css/vendor.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/responsive.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/login.css' %}">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+
+</head>
+<body>
+
+    <!-- preloader area start -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-inner">
+            <div class="spinner">
+                <div class="dot1"></div>
+                <div class="dot2"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- search popup start-->
+    <div class="td-search-popup" id="td-search-popup">
+        <form action="main-index.html" class="search-form">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search.....">
+            </div>
+            <button type="submit" class="submit-btn"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+    <!-- search popup end-->
+    <div class="body-overlay" id="body-overlay"></div>
+
+    <!-- header start -->
+    <div class="navbar-area">
+        <!-- topbar end-->
+        
+        <!-- topbar end-->
+
+        <!-- adbar end-->
+        
+        <!-- adbar end-->
+
+        <!-- navbar start -->
+        <nav class="navbar navbar-expand-lg">
+            <div class="container nav-container">
+                <div class="responsive-mobile-menu">
+                    <div class="logo d-lg-none d-block">
+                        <a class="main-logo" href="{% url 'main_index' %}"><img src="{% static 'main/img/play.png'%}" style="height: 40px;width: 40px;" alt="img">&nbsp;&nbsp;<span style="font-size: larger;font-weight: bolder;color:rgb(121, 197, 133) ;">YTKSA</span></a>
+                    </div>
+                    <button class="menu toggle-btn d-block d-lg-none" data-target="#nextpage_main_menu" 
+                    aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="icon-left"></span>
+                        <span class="icon-right"></span>
+                    </button>
+                </div>
+                <!-- <div class="nav-right-part nav-right-part-mobile">
+                    <a class="search header-search" href="#"><i class="fa fa-search"></i></a>
+                </div> -->
+                <div class="collapse navbar-collapse" id="nextpage_main_menu">
+                    <ul class="navbar-nav menu-open">
+                        <div class="row">
+                            <div class="col-5 d-none d-lg-block">
+                        <li class="">
+                            <a class="main-logo " href="{% url 'main_index' %}"><img src="{% static 'main/img/play.png'%}" style="height: 40px;width: 40px;" alt="img">&nbsp;&nbsp;<span style="font-size: larger;font-weight: bolder;color:rgb(255, 255, 255) ;">YTKSA</span></a>
+                        </li>
+                            </div>
+                            <div class="col-7">
+                        <li class="current-menu-item" style="left: 20%;">
+                            <a href="{% url 'main_index' %}">Home</a>
+                        </li>                        
+                        <li class="current-menu-item">
+                            <a href="{% url 'main_admin_login' %}">Admin</a>
+                        </li>                        
+                        <li class="current-menu-item">
+                            <a href="{% url 'main_user_login' %}">User</a>
+                        </li>                        
+                        
+                        <li class="current-menu-item">
+                            <a href="{% url 'main_about' %}">About</a>
+                        </li>
+                        <li class="current-menu-item">
+                            <a href="{% url 'main_contact' %}">Contact Us</a>
+                        </li>
+                    </div>
+                    </div>
+                    </ul>
+                </div>
+                <!-- <div class="nav-right-part nav-right-part-desktop">
+                    <div class="menu-search-inner">
+                        <input type="text" placeholder="Search For">
+                        <button type="submit" class="submit-btn"><i class="fa fa-search"></i></button>
+                    </div>
+                </div> -->
+            </div>
+        </nav>
+    </div>
+    <!-- navbar end -->
+
+    <!-- banner area start -->
+    <div class="banner-area bg-black" id="banner">
+        <!-- banner area start -->
+        <div class="banner-inner pt-5">
+            <div class="container">
+                <h2 class="text-white text-center">Contact Us</h2>
+                <h6 class="text-white text-center">Main / Contact</h6>
+            </div>
+        </div>
+        <!-- banner area end -->
+
+        
+    </div>
+    <!-- banner area end -->
+
+    <div class="post-area pd-top-75 pd-bottom-50 " id="trending" >
+        <div class="container " >
+            <div class="row">
+                <div class="container-xxl py-6">
+                    <div class="container">
+                        <div class="row g-5">
+                            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 450px;">
+                                <div class="position-relative h-100">
+                                    <iframe class="position-relative w-100 h-100"
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3808.2381018955916!2d78.54720121418707!3d17.35227210838585!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9978d5a0a633%3A0x7f965425ffaf7960!2smanacinfotech!5e0!3m2!1sen!2sin!4v1664181618366!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></>
+                                    frameborder="0" style="min-height: 450px; border:0;" allowfullscreen="" aria-hidden="false"
+                                    tabindex="0"></iframe>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+                                <h6 class="text-primary text-uppercase mb-2">Contact Us</h6>
+                                <h1 class="display-6 mb-4">If You Have Any Query, Please Contact Us</h1>
+                                <p class="mb-4">The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p>
+                                <form>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control border-0 bg-light" id="name" placeholder="Your Name">
+                                                <label for="name">Your Name</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input type="email" class="form-control border-0 bg-light" id="email" placeholder="Your Email">
+                                                <label for="email">Your Email</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control border-0 bg-light" id="subject" placeholder="Subject">
+                                                <label for="subject">Subject</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <textarea class="form-control border-0 bg-light" placeholder="Leave a message here" id="message" style="height: 150px"></textarea>
+                                                <label for="message">Message</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <button class="btn btn-primary" type="submit">Send Message</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <div class="footer-area bg-black">
+        <div class="container">
+            <div class="row justify-content-center">
+    
+    
+    
+                <div class="col-lg-6 col-sm-6 mt-5 mb-5">
+    
+                    <footer class="" style="margin-left: 23%;">
+                        <div class="d-sm-flex ">
+                            <p class="text-white">Copyright © manacinfotech.in. All rights reserved.<br><br>
+                                Designed and Developed By: <a style="color: aqua;" href="https://www.manacinfotech.in" target="_blank">manacinfotech</a>
+                            </p>
+    
+                        </div>
+                    </footer>
+    
+                </div>
+            </div>
+    
+        </div>
+    </div>
+
+    <!-- back to top area start -->
+    <div class="back-to-top">
+        <span class="back-top"><i class="fa fa-angle-up"></i></span>
+    </div>
+    <!-- back to top area end -->
+
+    <!-- all plugins here -->
+    <script src="{% static 'main/js/vendor.js' %}"></script>
+    <!-- main js  -->
+    <script src="{% static 'main/js/main.js' %}"></script>
+</body>
+</html>

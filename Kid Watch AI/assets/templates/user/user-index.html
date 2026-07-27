@@ -1,0 +1,447 @@
+<!-- <!DOCTYPE html>
+{% load static %}
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>YTKSA - YouTube Kids Sentiment Analysis and Detection</title>
+    
+
+    <!-- favicon -->
+    <link rel=icon href="{% static 'user/img/play.png' %}" sizes="20x20" type="image/png">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{% static 'user/css/vendor.css' %}">
+    <link rel="stylesheet" href="{% static 'user/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'user/css/responsive.css' %}">
+    <link rel="stylesheet" href="{% static 'user/css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'user/css/video.css' %}">
+    <link rel="stylesheet" href="{% static 'user/css/popup.css' %}">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+
+<body>
+    <script type="text/javascript">
+        function loginvalidation() {
+            
+            
+            var search = document.myform.search
+            
+            
+            
+            
+
+             
+           
+            
+            if (search.value.length <= 0) {
+              alert("Please enter a url")
+              search.focus();
+              return false;
+            }
+        return true;
+        }   
+</script>
+
+
+{% if messages %}
+{% for message in messages %}
+{% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+<script>swal({
+      title: "Success!",
+      text: "{{message}}",
+      icon: "success",
+      button: "OK",
+  });
+</script>
+
+{% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+<script>swal({
+      title: "success :)",
+      text: "{{message}}",
+      icon: "success",
+      button: "OK",
+  });
+</script>
+{% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+<script>swal({
+      title: "error :)",
+      text: "{{message}}",
+      icon: "error",
+      button: "OK",
+  });
+</script>
+{% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+<script>swal({
+      title: "error :)",
+      text: "{{message}}",
+      icon: "error",
+      button: "OK",
+  });
+</script>
+{% endif %}
+{% endfor %}
+{% endif %}
+
+    <style>
+        .find{
+            margin-bottom: auto;
+            margin-top: auto;
+            height: 70px;
+            width: 50%;
+            background-color: #fff;
+            border-radius: 40px;
+            padding: 10px;
+    }
+        .find_done{
+            color: white;
+            border: 0;
+            outline: 0;
+            background: none;
+            width: 0;
+            margin-top:5px;
+            caret-color:transparent;
+            line-height: 40px;
+            transition: width 0.4s linear;
+        }
+    </style>
+    
+
+    <!-- preloader area start -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-inner">
+            <div class="spinner">
+                <div class="dot1"></div>
+                <div class="dot2"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- search popup start-->
+
+    <!-- search popup end-->
+
+    <!-- header start -->
+    <div class="navbar-area">
+        <!-- topbar end-->
+
+        <!-- topbar end-->
+
+        <!-- adbar end-->
+
+        <!-- adbar end-->
+
+        <!-- navbar start -->
+        <nav class="navbar navbar-expand-lg">
+            <div class="container nav-container">
+                <div class="responsive-mobile-menu">
+                    <div class="logo d-lg-none d-block">
+                        <a class="main-logo" href="{% url 'user_index' %}"><img
+                                src="{% static 'user/img/play.png'%}" style="height: 40px;width: 40px;"
+                                alt="img">&nbsp;&nbsp;<span
+                                style="font-size: larger;font-weight: bolder;color:rgb(121, 197, 133) ;">YTKSA</span></a>
+                    </div>
+                    <button class="menu toggle-btn d-block d-lg-none" data-target="#nextpage_main_menu"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="icon-left"></span>
+                        <span class="icon-right"></span>
+                    </button>
+                </div>
+                <!-- <div class="nav-right-part nav-right-part-mobile">
+                    <a class="search header-search" href="#"><i class="fa fa-search"></i></a>
+                </div> -->
+                <div class="collapse navbar-collapse" id="nextpage_main_menu">
+                    <ul class="navbar-nav menu-open">
+                        <div class="row">
+                            <div class="col-5 d-none d-lg-block">
+                                <li class="">
+                                    <a class="main-logo " href="{% url 'user_index' %}"><img
+                                            src="{% static 'user/img/play.png'%}"
+                                            style="height: 40px;width: 40px;" alt="img">&nbsp;&nbsp;<span
+                                            style="font-size: larger;font-weight: bolder;color:rgb(255, 255, 255) ;">YTKSA</span></a>
+                                </li>
+                            </div>
+                            <div class="col-7">
+                                <li class="current-menu-item" style="left: 20%;">
+                                    <a href="{% url 'user_index' %}">Detect</a>
+                                </li>
+                                <li class="current-menu-item">
+                                    <a href="{% url 'user_profile'%}">Profile</a>
+                                </li>
+                                <li class="current-menu-item">
+                                    <a href="{% url 'user_feedback'%}">Feedback</a>
+                                </li>
+
+                                <li class="current-menu-item">
+                                    <a href="{% url 'main_index' %}">Logout</a>&nbsp;<i class="fa fa-door-open"
+                                        style="color: aliceblue;"></i>
+                                </li>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+                <!-- <div class="nav-right-part nav-right-part-desktop">
+                    <div class="menu-search-inner">
+                        <input type="text" placeholder="Search For">
+                        <button type="submit" class="submit-btn"><i class="fa fa-search"></i></button>
+                    </div>
+                </div> -->
+            </div>
+        </nav>
+    </div>
+    <!-- navbar end -->
+
+    <!-- banner area start -->
+    <div class="banner-area bg-black" id="banner">
+        <!-- banner area start -->
+        <div class="banner-inner pt-5">
+            <div class="container">
+                <h2 class="text-white text-center">Detection</h2>
+                <h6 class="text-white text-center">Main / Detect</h6>
+            </div>
+        </div>
+        <!-- banner area end -->
+
+
+    </div>
+    <!-- banner area end -->
+
+    <div class="post-area pd-top-75 pd-bottom-50 " id="trending">
+        <div class="container ">
+            <form class="pt-3 mt-3" enctype="multipart/form-data" method="post" onsubmit='return loginvalidation();' name='myform'>
+                {% csrf_token %}
+                <div class="row card "
+                    style=" border-radius: 500px; background-color: #ecf0f3; box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;">
+                    <div class="d-flex justify-content-center">
+            
+                        <h3 class="mb-2" style="color: black;"><b> Enter URL... </b></h3>
+                    </div>
+                    <div class="col-lg-12 col-md-4">
+                        <div class="d-flex justify-content-center">
+                            <div class="find mt-2 mb-4 text-black-50" style="box-shadow: 13px 13px 20px #ecf0f3;">
+                                <input class="" style="border-radius: 20px;box-shadow: inset 8px 8px 8px #ecf0f3;width:87%;margin-top:10px"
+                                    type="text" name="search" placeholder="Search here...">&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button type="submit" class="search_icon"><i class="fa fa-search"></i></button>
+                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <section class="anime-details spad">
+        <div class="container" style="background-color: #ecf0f3;border-radius: 25px;">
+            <div class="row justify-content-center">
+                <h2 class="mt-5 mb-5">Here's Your Search Result...</h2>
+                
+            </div>
+            <div class="row">
+                {% if vid %}
+                <div class="col-lg-12">
+                    <div class="anime__video__player" style="margin-left: 22%;">
+                        <iframe width="660" height="315" src="https://www.youtube.com/embed/{{vid}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </div>
+                    
+                    <!-- <div class="anime__details__episodes">
+                        <div class="section-title">
+                            <h5>List Name</h5>
+                        </div>
+                        <a href="#">Ep 01</a>
+                        <a href="#">Ep 02</a>
+                        <a href="#">Ep 03</a>
+                        <a href="#">Ep 04</a>
+                        <a href="#">Ep 05</a>
+                        <a href="#">Ep 06</a>
+                        <a href="#">Ep 07</a>
+                        <a href="#">Ep 08</a>
+                        <a href="#">Ep 09</a>
+                        <a href="#">Ep 10</a>
+                        <a href="#">Ep 11</a>
+                        <a href="#">Ep 12</a>
+                        <a href="#">Ep 13</a>
+                        <a href="#">Ep 14</a>
+                        <a href="#">Ep 15</a>
+                        <a href="#">Ep 16</a>
+                        <a href="#">Ep 17</a>
+                        <a href="#">Ep 18</a>
+                        <a href="#">Ep 19</a>
+                    </div> -->
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    
+                    <div class="anime__details__review">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-6 section-title">
+                                <h5>Video Sentiment : {{senti}}&nbsp;&nbsp;{% if senti == 'positive' %}<img src="{% static 'user/img/pos.png' %}" alt="">{% elif senti == 'very positive' %}<img src="{% static 'user/img/vpos.png' %}" alt="">{% elif senti == 'negative' %}<img src="{% static 'user/img/nega.png' %}" alt="">{% elif senti == 'very negative' %}<img src="{% static 'user/img/vnega.png' %}" alt="">{% else %}<img src="{% static 'user/img/neutral.png' %}" alt="">{% endif %}</h5>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 section-title">
+                                <h5>Comments</h5>
+                            </div>
+                            
+                            
+                        </div>
+                        {% for i in non %}
+                        <div class="anime__review__item">
+                            <div class="anime__review__item__pic">
+                                <img src="{{i.image}}" alt="">
+                            </div>
+                            <div class="anime__review__item__text">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <h6>{{i.name}}
+
+                                    </div>
+                                    <div class="col-lg-6">
+
+                                        <div class="text-end" style="margin-left: 50%;">
+                                            {% if  i.sentiment == 'Positive' %}
+                                            <p>Positive&nbsp;&nbsp;<img src="{% static 'user/img/pos.png' %}" alt=""></p>
+                                            {% elif  i.sentiment == 'Very Positive' %}
+                                            <p>Very Positive&nbsp;&nbsp;<img src="{% static 'user/img/vpos.png' %}" alt=""></p>
+                                            {% elif i.sentiment == 'Very Negative' %}
+                                            <p>Very Negative&nbsp;&nbsp;<img src="{% static 'user/img/vnega.png' %}" alt=""></p>
+                                            {% elif i.sentiment == 'Negative' %}
+                                            <p>Negative&nbsp;&nbsp;</p>
+                                            {% else %}
+                                            <p>Neutral&nbsp;&nbsp;<img src="{% static 'user/img/neutral.png' %}" alt=""></p>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                </div>
+                                </h6>
+                                <p>{{i.comment}}<br></p>
+                            </div>
+                            <div>
+                               
+                                
+                                
+                            </div>
+                        </div>
+                        
+                        {% endfor %}
+                    </div>
+                    <div class="hashwar">
+                        <div class="Click-here">Read More</div>        
+                        <div class="custom-model-main">
+                            <div class="custom-model-inner">        
+                            <div class="close-btn">×</div>
+                                <div class="custom-model-wrap">
+                                    <div class="pop-up-content-wrap">
+                                        {% for i in comm %}
+                                        <div class="anime__review__item">
+                                            <div class="anime__review__item__pic">
+                                                <img src="{{i.image}}" alt="">
+                                            </div>
+                                            <div class="anime__review__item__text">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <h6>{{i.name}}
+                
+                                                    </div>
+                                                    <div class="col-lg-6">
+                
+                                                        <div class="text-end" style="margin-left: 50%;">
+                                                            {% if  i.sentiment == 'Positive' %}
+                                                            <p>Positive&nbsp;&nbsp;<img src="{% static 'user/img/pos.png' %}" alt=""></p>
+                                                            {% elif  i.sentiment == 'Very Positive' %}
+                                                            <p>Very Positive&nbsp;&nbsp;<img src="{% static 'user/img/vpos.png' %}" alt=""></p>
+                                                            {% elif i.sentiment == 'Very Negative' %}
+                                                            <p>Very Negative&nbsp;&nbsp;<img src="{% static 'user/img/vnega.png' %}" alt=""></p>
+                                                            {% elif i.sentiment == 'Negative' %}
+                                                            <p>Negative&nbsp;&nbsp;<img src="{% static 'user/img/nega.png' %}" alt=""></p>
+                                                            {% else %}
+                                                            <p>Neutral&nbsp;&nbsp;<img src="{% static 'user/img/neutral.png' %}" alt=""></p>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                
+                                                </div>
+                                                </h6>
+                                                <p>{{i.comment}}<br></p>
+                                            </div>
+                                            <div>
+                                               
+                                                
+                                                
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>  
+                            </div>  
+                            <div class="bg-overlay"></div>
+                        </div> 
+                       </div>
+   
+                       </div>
+
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+
+
+    <div class="footer-area bg-black">
+        <div class="container">
+            <div class="row justify-content-center">
+
+
+
+                <div class="col-lg-6 col-sm-6 mt-5 mb-5">
+
+                    <footer class="" style="margin-left: 23%;">
+                        <div class="d-sm-flex ">
+                            <p class="text-white">Copyright © manacinfotech.in. All rights reserved.<br><br>
+                                Designed and Developed By: <a style="color: #03A9F4" href="https://www.manacinfotech.in"
+                                    target="_blank">manacinfotech</a>
+                            </p>
+
+                        </div>
+                    </footer>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- back to top area start -->
+    <div class="back-to-top">
+        <span class="back-top"><i class="fa fa-angle-up"></i></span>
+    </div>
+
+    <!-- back to top area end -->
+
+    <!-- all plugins here -->
+    <script src="{% static 'user/js/vendor.js' %}"></script>
+    <!-- main js  -->
+    <script src="{% static 'user/js/main.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(".Click-here").on('click', function() {
+            $(".custom-model-main").addClass('model-open');
+          }); 
+          $(".close-btn, .bg-overlay").click(function(){
+            $(".custom-model-main").removeClass('model-open');
+          });
+       </script>
+</body>
+
+</html> -->
