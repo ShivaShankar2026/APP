@@ -40,6 +40,14 @@ DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 # Add your PythonAnywhere domain here once deployed, e.g. ['yourusername.pythonanywhere.com']
 ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
 
+# CSRF: Django needs the full scheme+domain listed here for POST forms
+# (like login) to work behind Railway's HTTPS proxy.
+CSRF_TRUSTED_ORIGINS = [
+    f'https://{host.strip()}'
+    for host in os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(',')
+    if host.strip()
+]
+
 
 # Application definition
 
